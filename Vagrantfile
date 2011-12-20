@@ -1,5 +1,6 @@
 require File.expand_path(__FILE__) + "/../lib/cpspec"
 Vagrant::Config.run do |config|
+  config.test.directory = "/Users/shishir/Projects/cpspec/test"
   config.vm.define :dev do |conf|
     conf.vm.box = "lucid32"
     conf.vm.provision :chef_solo do |chef|

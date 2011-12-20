@@ -6,16 +6,19 @@ module Cpspec
     end
 
     def call(env)
+      files = Dir.glob("test/*.rb")
       if env["vm"].created? && env["vm"].vm.running?
-        command = "ruby /vagrant/#{env["test.file"]}".strip
+        files.each do |file|
+          command = "ruby /vagrant/#{file}".strip
 
-        env["vm"].ssh.execute do |ssh|
-          env.ui.info "Running Test: #{env["test.file"]}"
-          
-          ssh.exec!("#{command}") do |channel, type, data|
-            $stdout.print(data) if type != :exit_status
+          env["vm"].ssh.execute do |ssh|
+            env.ui.info "Running Test: #{file}"
+
+            ssh.exec!("#{command}") do |channel, type, data|
+              $stdout.print(data) if type != :exit_status
+            end
+            $stdout.puts
           end
-          $stdout.puts
         end
       end
       @app.call(env)
