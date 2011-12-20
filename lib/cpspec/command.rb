@@ -1,23 +1,17 @@
-require 'erb'
-require 'cpspec/config'
-
-
 module Cpspec
-  class Runner
-    def self.run
-      #load configuration file
-      #generate vagrant file from template
+  class RunTest < Vagrant::Command::Base
+    register "run_test", "Runs a tests for cookbooks inside the VM environment"
 
-      cookbook_name = :dev
-      cookbook_path = "chef-repo/cookbooks"
-      recipe = "vpn"
-      config = Config.new({:cookbook_name => cookbook_name, :cookbook_path => cookbook_path, :recipe => recipe, :platform => "ubuntu"})
+    argument :filename, :type => :string, :require => true, :desc => "Name of the spec file"
 
-      template_path = File.dirname(__FILE__)
-      content = File.read("#{template_path}/vagrant_template.erb")
-      template = ERB.new(content)
-      File.open('VagrantFile', 'w') {|f| f.puts template.result(config.get_binding)}
-      #provision the box
+    def execute
+      target_vms.each {|vm| execute_on_vm(vm, filename)}
+    end
+
+    protected
+    def execute_on_vm(vm, filename)
+      vm.env.actions.run(:test, "test.file" => filename)
     end
   end
 end
+
