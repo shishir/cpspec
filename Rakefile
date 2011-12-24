@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "cpspec"
   gem.homepage = "http://github.com/shishir/cpspec"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{testing framework for chef and puppet}
+  gem.description = %Q{lets to run your chef cookbooks or puppet manifest again local vm and runs test on it}
   gem.email = "shishir.das@gmail.com"
   gem.authors = ["Shishir Das"]
   # dependencies defined in Gemfile
