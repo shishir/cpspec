@@ -11,6 +11,9 @@ GEM
       git (>= 1.2.5)
       rake
     json (1.5.2)
+    metaclass (0.0.1)
+    mocha (0.10.0)
+      metaclass (~> 0.0.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.1.4)
@@ -34,5 +37,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (= 1.1.rc.6)
   jeweler (~> 1.6.4)
+  mocha
   rake (= 0.9.2.2)
   vagrant (= 0.8.7)
