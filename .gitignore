@@ -40,3 +40,6 @@ For MacOS:
 # For vim:
 *.swp
 
+/.vagrant
+/Vagrantfile
+/env-test/test_java_cookbook.rb
