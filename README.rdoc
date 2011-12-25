@@ -6,6 +6,33 @@ Cpspec is a framework which allows behaviour driven development for chef cookboo
 
  gem install cpsec
 
+= Usage
+* Write test for the cook books
+ 
+ require 'test/unit'
+ class TestJavaCookbook
+   def test_java_installed_in_correct_path
+     assert_true File.exists?("/usr/bin/java")
+   end
+ end
+
+* Specify the test directory path (Absolute or relative)
+  require 'cpspec'
+
+  Vagrant::Config.run do |config|
+    config.test.directory = "env-test"
+    config.vm.define :dev do |conf|
+      conf.vm.box = "lucid32"
+      conf.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = "chef-repo/cookbooks"
+        chef.add_recipe "java"
+      end
+    end
+  end
+
+* Run tests
+ vagrant run_test
+
 == Copyright
 
 Copyright (c) 2011 Shishir Das. See LICENSE.txt for
