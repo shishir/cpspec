@@ -4,7 +4,7 @@ Cpspec is a framework which allows behaviour driven development for chef cookboo
 = Installation
 * Install vagrant. Installation instructions can be found here.(http://vagrantup.com/docs/getting-started/index.html)
 
-* <tt>gem install cpsec<tt>
+ gem install cpsec
 
 == Copyright
 
