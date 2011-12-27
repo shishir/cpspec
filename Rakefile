@@ -42,3 +42,28 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/test*.rb']
   t.verbose = true
 end
+
+desc 'run test on the target vm'
+task :run_test => [:find, :zip, :scp, :execute]
+
+task :find do |t|
+  #parse Vagrant file for it
+  cookbook_path = 'cookbooks'
+
+  #Chef query to determine the run_list.
+  cookbook_list = ''
+end
+
+task :zip do |t|
+#zip it up
+end
+
+task :scp do |t|
+# scp into box
+  
+end
+
+task :exec do |t|
+  #execute on the vm
+end
+
