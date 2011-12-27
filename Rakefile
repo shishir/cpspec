@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'bundler'
+require 'chef'
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -48,10 +49,12 @@ task :run_test => [:find, :zip, :scp, :execute]
 
 task :find do |t|
   #parse Vagrant file for it
+  # config file will be either you client.rb or knife.rb (anything that has chef client configured)
+  Chef::Config.from_file(config_file)
   cookbook_path = 'cookbooks'
-
   #Chef query to determine the run_list.
-  cookbook_list = ''
+  #TODO node_name and config_file variable needs to be set from external config
+  cookbook_list = Chef::Node.load(node_name).recipes
 end
 
 task :zip do |t|
