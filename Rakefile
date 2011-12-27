@@ -51,10 +51,13 @@ task :find, [:config_file, :node_name] do |t, args|
   # config file will be either you client.rb or knife.rb (anything
   # that has i chef client configured)
   Chef::Config.from_file(args.config_file)
-  cookbook_path = 'cookbooks'
-  #Chef query to determine the run_list.
+  cookbook_path = Chef::Config[:cookbook_path]
+    #Chef query to determine the run_list.
   #TODO node_name and config_file variable needs to be set from external config
   cookbook_list = Chef::Node.load(args.node_name).recipes
+
+  puts "Cookbook path is #{cookbook_path}"
+  puts "Cookbook list for node #{args.node_name} is #{cookbook_list}"
 end
 
 
