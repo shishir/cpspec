@@ -45,28 +45,16 @@ Rake::TestTask.new do |t|
 end
 
 desc 'run test on the target vm'
-task :run_test => [:find, :zip, :scp, :execute]
+task :run_test,[:config_file, :node_name] => [:find]
 
-task :find do |t|
-  #parse Vagrant file for it
-  # config file will be either you client.rb or knife.rb (anything that has chef client configured)
-  Chef::Config.from_file(config_file)
+task :find, [:config_file, :node_name] do |t, args|
+  # config file will be either you client.rb or knife.rb (anything
+  # that has i chef client configured)
+  Chef::Config.from_file(args.config_file)
   cookbook_path = 'cookbooks'
   #Chef query to determine the run_list.
   #TODO node_name and config_file variable needs to be set from external config
-  cookbook_list = Chef::Node.load(node_name).recipes
+  cookbook_list = Chef::Node.load(args.node_name).recipes
 end
 
-task :zip do |t|
-#zip it up
-end
-
-task :scp do |t|
-# scp into box
-  
-end
-
-task :exec do |t|
-  #execute on the vm
-end
 
