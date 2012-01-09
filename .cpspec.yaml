@@ -1,0 +1,6 @@
+knife_path: /Users/shishir/.chef/knife.rb
+node_name: 127.0.0.1
+remote_host: 127.0.0.1
+user_name: vagrant
+key: /Users/shishir/.rvm/gems/ruby-1.9.2-p290/gems/vagrant-0.8.7/keys/vagrant
+port:  2222
