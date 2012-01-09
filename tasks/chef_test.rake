@@ -7,15 +7,12 @@ require 'ostruct'
 TMP_DIR = "/tmp/cpspec"
 TMP_TEST_DIR = "#{TMP_DIR}/tests"
 
-
-
 desc 'run test on the node. config_file = path to knife.rb, node_name = host/ip of the chef managed node'
 
 CLEAN.include(TMP_DIR)
 
 namespace :chef do
   task :run_test => [:clean, :do_it]
-
   
   task :do_it do |t|
     config_file =  ".cpspec.yaml"
@@ -50,7 +47,7 @@ namespace :chef do
     tar_name = "#{TMP_DIR}/tests.tar.gz"
     command = "tar -czvf #{tar_name} -C #{TMP_DIR} tests"
     `#{command}`
-
+    
 
 
     remote_path = "/tmp"
@@ -63,7 +60,6 @@ namespace :chef do
     Net::SSH.start(configuration.remote_host, configuration.user_name, :keys=>[configuration.key], :port => configuration.port) do |ssh|
       output = ssh.exec!("cd #{remote_path}; tar -xzvf tests.tar.gz")
       puts output
-
 
       output = ssh.exec!("cd #{remote_path}/tests; /opt/ruby/bin/ruby runner")
       puts output
